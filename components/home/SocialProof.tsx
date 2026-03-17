@@ -3,15 +3,11 @@
 import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { content } from '@/lib/content'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const stats = [
-  { value: 500, suffix: '+', label: 'Events Produced' },
-  { value: 100, suffix: '+', label: 'Clients Served' },
-  { value: 15, suffix: '+', label: 'Years of Excellence' },
-  { value: 50, suffix: '+', label: 'Industry Awards' }
-]
+const stats = content.results.stats
 
 export default function SocialProof() {
   const sectionRef = useRef<HTMLElement>(null)
@@ -65,11 +61,20 @@ export default function SocialProof() {
   return (
     <section
       ref={sectionRef}
+      id="results"
       className="relative bg-white w-full"
-      style={{ paddingTop: '200px', paddingBottom: '200px' }}
+      style={{ paddingTop: '140px', paddingBottom: '140px' }}
     >
       <div className="w-full flex justify-center">
         <div className="max-w-[1200px] px-6 w-full">
+        <div className="max-w-[760px] mb-16">
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gold mb-4">
+            {content.results.eyebrow}
+          </p>
+          <h2 className="text-[44px] md:text-[60px] font-bold leading-[1.05] text-black">
+            {content.results.title}
+          </h2>
+        </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-16">
           {stats.map((stat, i) => (
             <div
@@ -91,4 +96,3 @@ export default function SocialProof() {
     </section>
   )
 }
-

@@ -4,24 +4,25 @@ import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { Sparkles, Users, Lightbulb } from 'lucide-react'
+import { content } from '@/lib/content'
 
 gsap.registerPlugin(ScrollTrigger)
 
 const capabilities = [
   {
     icon: Sparkles,
-    title: 'Event Production',
-    description: 'End-to-end execution of galas, conferences, product launches, and VIP experiences.'
+    title: content.services.items[0].title,
+    description: content.services.items[0].description
   },
   {
     icon: Users,
-    title: 'Experiential Marketing',
-    description: 'Brand activations and immersive campaigns that create lasting emotional connections.'
+    title: content.services.items[1].title,
+    description: content.services.items[1].description
   },
   {
     icon: Lightbulb,
-    title: 'Creative Strategy',
-    description: 'Concept development, show calling, and environmental design that tells your story.'
+    title: content.services.items[2].title,
+    description: content.services.items[2].description
   }
 ]
 
@@ -55,11 +56,23 @@ export default function Capabilities() {
   return (
     <section
       ref={sectionRef}
+      id="services"
       className="relative bg-neutral-50 w-full"
-      style={{ paddingTop: '200px', paddingBottom: '200px' }}
+      style={{ paddingTop: '140px', paddingBottom: '140px' }}
     >
       <div className="w-full flex justify-center">
         <div className="max-w-[1200px] px-6 w-full">
+        <div className="max-w-[760px] mb-16">
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gold mb-4">
+            {content.services.eyebrow}
+          </p>
+          <h2 className="text-[44px] md:text-[60px] font-bold leading-[1.05] text-black mb-6">
+            {content.services.title}
+          </h2>
+          <p className="text-[19px] md:text-[22px] leading-[1.6] text-neutral-600">
+            {content.services.description}
+          </p>
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {capabilities.map((item, i) => {
             const Icon = item.icon
@@ -105,4 +118,3 @@ export default function Capabilities() {
     </section>
   )
 }
-

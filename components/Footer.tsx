@@ -1,21 +1,17 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Instagram, Twitter, Linkedin, Facebook } from 'lucide-react'
+import { Instagram, Linkedin } from 'lucide-react'
+import Image from 'next/image'
+import { content } from '@/lib/content'
 
 export default function Footer() {
   const socialLinks = [
     { icon: Instagram, href: 'https://instagram.com/thisiskatalyst', label: 'Instagram' },
-    { icon: Twitter, href: 'https://twitter.com/katalystprod', label: 'Twitter' },
-    { icon: Linkedin, href: '#', label: 'LinkedIn' },
-    { icon: Facebook, href: '#', label: 'Facebook' }
+    { icon: Linkedin, href: 'https://linkedin.com/company/katalyst-productions', label: 'LinkedIn' },
   ]
 
-  const footerLinks = {
-    Company: ['About Us', 'Our Team', 'Careers', 'Contact'],
-    Services: ['Event Production', 'Experiential Marketing', 'Brand Activations', 'Virtual Events'],
-    Resources: ['Portfolio', 'Case Studies', 'Blog', 'FAQs']
-  }
+  const footerLinks = content.footer.columns
 
   return (
     <footer className="bg-black text-white relative overflow-hidden">
@@ -32,14 +28,17 @@ export default function Footer() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 bg-gold rounded-lg flex items-center justify-center">
-                  <span className="text-black font-bold text-2xl">K</span>
-                </div>
-                <span className="text-white font-bold text-2xl">KATALYST</span>
+              <div className="mb-6">
+                <Image
+                  src="/images/logos/KatalystLogo_PMS7556_BLACK.png"
+                  alt="Katalyst Productions"
+                  width={200}
+                  height={60}
+                  className="h-10 w-auto brightness-0 invert"
+                />
               </div>
               <p className="text-gray-400 mb-6 leading-relaxed">
-                Award-winning event production and experiential marketing agency creating unforgettable experiences.
+                {content.footer.description}
               </p>
               <div className="flex gap-4">
                 {socialLinks.map((social, index) => (
@@ -71,25 +70,31 @@ export default function Footer() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: columnIndex * 0.1 }}
             >
-              <h3 className="text-gold font-semibold mb-4">{title}</h3>
+              <h3 className="text-gold font-semibold mb-4 text-sm uppercase tracking-widest">{title}</h3>
               <ul className="space-y-3">
-                {links.map((link, index) => (
-                  <motion.li
-                    key={link}
-                    initial={{ opacity: 0, x: -10 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: columnIndex * 0.1 + index * 0.05 }}
-                  >
-                    <motion.a
-                      href="#"
-                      whileHover={{ x: 5, color: '#D4AF37' }}
-                      className="text-gray-400 hover:text-gold transition-all duration-300"
+                {links.map((link, index) => {
+                  const href = link.startsWith('(') ? 'tel:2673178798'
+                    : link.includes('@') ? `mailto:${link}`
+                    : title === 'Contact' ? '#'
+                    : '#contact'
+                  return (
+                    <motion.li
+                      key={link}
+                      initial={{ opacity: 0, x: -10 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.4, delay: columnIndex * 0.1 + index * 0.05 }}
                     >
-                      {link}
-                    </motion.a>
-                  </motion.li>
-                ))}
+                      <motion.a
+                        href={href}
+                        whileHover={{ x: 5, color: '#D4AF37' }}
+                        className="text-gray-400 hover:text-gold transition-all duration-300 text-sm"
+                      >
+                        {link}
+                      </motion.a>
+                    </motion.li>
+                  )
+                })}
               </ul>
             </motion.div>
           ))}
@@ -133,4 +138,3 @@ export default function Footer() {
     </footer>
   )
 }
-

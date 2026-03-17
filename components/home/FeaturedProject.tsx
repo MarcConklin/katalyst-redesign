@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Image from 'next/image'
+import { content } from '@/lib/content'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -47,8 +48,9 @@ export default function FeaturedProject() {
   return (
     <section
       ref={sectionRef}
+      id="featured-work"
       className="relative bg-black overflow-hidden w-full"
-      style={{ paddingTop: '160px', paddingBottom: '160px' }}
+      style={{ paddingTop: '120px', paddingBottom: '120px' }}
     >
       {/* Background Image with Parallax */}
       <div 
@@ -72,24 +74,24 @@ export default function FeaturedProject() {
         <div className="max-w-[680px] px-6 text-center">
         <div ref={textRef}>
           <div className="text-[14px] tracking-[0.2em] uppercase text-gold mb-6">
-            Featured Work
+            {content.featuredWork.eyebrow}
           </div>
           <h3 className="text-[48px] md:text-[64px] font-bold leading-[1.1] text-white mb-6">
-            Four Seasons Philadelphia Grand Opening
+            {content.featuredWork.title}
           </h3>
           <p className="text-[20px] leading-[1.6] text-neutral-300 mb-12">
-            A multi-day celebration launching Philadelphia's most anticipated luxury hotel with immersive experiences for 2,000+ VIP guests.
+            {content.featuredWork.description}
           </p>
-          <button
+          <a
+            href={content.featuredWork.cta.href}
             style={{ paddingLeft: '48px', paddingRight: '48px', paddingTop: '14px', paddingBottom: '14px', fontSize: '18px' }}
-            className="bg-gold text-black font-semibold rounded-full hover:bg-gold-light transition-all duration-300"
+            className="inline-block bg-gold text-black font-semibold rounded-full hover:bg-gold-light transition-all duration-300"
           >
-            View Case Study
-          </button>
+            {content.featuredWork.cta.label}
+          </a>
         </div>
         </div>
       </div>
     </section>
   )
 }
-

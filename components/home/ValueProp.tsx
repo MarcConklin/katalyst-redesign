@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { content } from '@/lib/content'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -42,26 +43,29 @@ export default function ValueProp() {
   return (
     <section
       ref={sectionRef}
+      id="how-we-help"
       className="relative bg-white w-full"
-      style={{ paddingTop: '200px', paddingBottom: '200px' }}
+      style={{ paddingTop: '140px', paddingBottom: '140px' }}
     >
       <div className="w-full flex justify-center">
-        <div className="max-w-[680px] px-6 text-center">
+        <div className="max-w-[960px] px-6 text-center">
+        <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gold mb-6">
+          {content.intro.eyebrow}
+        </p>
         <h2 
           ref={headlineRef}
           className="text-[64px] md:text-[80px] lg:text-[96px] font-bold leading-[1.05] tracking-tight text-black mb-8"
         >
-          We turn moments into movements.
+          {content.intro.title}
         </h2>
         <p
           ref={subtextRef}
           className="text-[20px] md:text-[24px] leading-[1.5] text-neutral-600"
         >
-          From intimate gatherings to large-scale productions, we create experiences that people remember, talk about, and return to.
+          {content.intro.description}
         </p>
         </div>
       </div>
     </section>
   )
 }
-

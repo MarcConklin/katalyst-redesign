@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { content } from '@/lib/content'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -42,42 +43,49 @@ export default function FinalCTA() {
   return (
     <section
       ref={sectionRef}
+      id="contact"
       className="relative bg-black w-full"
-      style={{ paddingTop: '240px', paddingBottom: '240px' }}
+      style={{ paddingTop: '160px', paddingBottom: '160px' }}
     >
       <div className="w-full flex justify-center">
         <div className="max-w-[680px] px-6 text-center">
-        <h2 
-          ref={headlineRef}
-          className="text-[56px] md:text-[72px] font-bold leading-[1.1] text-white mb-16"
-        >
-          Let's create something
-          <span className="text-gold"> extraordinary</span>
-        </h2>
-        
-        <a
-          ref={buttonRef}
-          href="mailto:hello@katalystproductions.co"
-          style={{ paddingLeft: '48px', paddingRight: '48px', paddingTop: '14px', paddingBottom: '14px', fontSize: '18px' }}
-          className="inline-block bg-gold text-black font-semibold rounded-full hover:scale-105 transition-transform duration-300"
-        >
-          Start a Conversation
-        </a>
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gold mb-6">
+            {content.cta.eyebrow}
+          </p>
+          <h2
+            ref={headlineRef}
+            className="text-[48px] md:text-[64px] font-bold leading-[1.1] text-white mb-6"
+          >
+            {content.cta.title}
+          </h2>
+          <p className="text-[19px] leading-[1.65] text-neutral-400 mb-10">
+            {content.cta.description}
+          </p>
+          <p className="text-[15px] text-neutral-500 mb-10">
+            {content.cta.reassurance}
+          </p>
 
-        <div className="mt-20 flex flex-col md:flex-row items-center justify-center gap-8 text-[16px] text-neutral-400">
-          <a href="tel:2673178798" className="hover:text-gold transition-colors">
-            (267) 317-8798
-          </a>
-          <span className="hidden md:block">•</span>
-          <a href="mailto:hello@katalystproductions.co" className="hover:text-gold transition-colors">
-            hello@katalystproductions.co
-          </a>
-          <span className="hidden md:block">•</span>
-          <span>Philadelphia, PA</span>
-        </div>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <a
+              ref={buttonRef}
+              href={content.cta.buttonHref}
+              style={{ paddingLeft: '40px', paddingRight: '40px', paddingTop: '14px', paddingBottom: '14px', fontSize: '17px' }}
+              className="bg-gold text-black font-semibold rounded-full hover:bg-gold-light hover:scale-105 transition-all duration-300"
+            >
+              {content.cta.button}
+            </a>
+            <a
+              href={content.cta.secondaryHref}
+              style={{ paddingLeft: '40px', paddingRight: '40px', paddingTop: '14px', paddingBottom: '14px', fontSize: '17px' }}
+              className="bg-white/10 text-white font-semibold rounded-full border border-white/20 hover:bg-white/20 transition-all duration-300"
+            >
+              {content.cta.secondaryButton} · {content.cta.contact.phone}
+            </a>
+          </div>
+
+          <p className="mt-8 text-[14px] text-neutral-600">{content.cta.contact.location}</p>
         </div>
       </div>
     </section>
   )
 }
-

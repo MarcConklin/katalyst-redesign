@@ -4,6 +4,7 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import { useState, useEffect } from 'react'
 import { Menu, X } from 'lucide-react'
 import Image from 'next/image'
+import { content } from '@/lib/content'
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
@@ -23,48 +24,41 @@ export default function Navigation() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const navItems = [
-    { name: 'Home', href: '#home' },
-    { name: 'About', href: '#about' },
-    { name: 'Services', href: '#services' },
-    { name: 'Work', href: '#work' },
-    { name: 'Contact', href: '#contact' }
-  ]
+  const navItems = content.nav.items
 
   return (
     <>
       <motion.nav
         style={{
           backgroundColor,
-          paddingTop: isScrolled ? '40px' : '32px',
-          paddingBottom: isScrolled ? '40px' : '32px'
+          paddingTop: isScrolled ? '18px' : '24px',
+          paddingBottom: isScrolled ? '18px' : '24px'
         }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled ? 'backdrop-blur-lg shadow-lg' : ''
         }`}
       >
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex items-center justify-between">
+        <div className="w-full max-w-[1680px] mx-auto px-10 md:px-16 lg:px-24 xl:px-28">
+          <div className="grid grid-cols-[auto_1fr] items-center gap-10">
             {/* Logo */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
-              className="flex items-center"
-              style={{ marginLeft: '40px' }}
+              className="ml-10 md:ml-14 lg:ml-20 flex items-center shrink-0"
             >
               <Image
                 src="/images/logos/KatalystLogo_PMS7556_BLACK.png"
                 alt="Katalyst Productions"
                 width={400}
                 height={120}
-                className="h-24 md:h-28 w-auto brightness-0 invert"
+                className="h-14 md:h-16 lg:h-[4.5rem] w-auto brightness-0 invert"
                 priority
               />
             </motion.div>
 
             {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center gap-8">
+            <div className="hidden md:flex flex-1 items-center justify-end gap-8 lg:gap-10">
               {navItems.map((item, index) => (
                 <motion.a
                   key={item.name}
@@ -73,22 +67,23 @@ export default function Navigation() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   whileHover={{ scale: 1.1, color: '#D4AF37' }}
-                  className="text-white hover:text-gold transition-colors duration-300 font-medium"
+                  className="text-[15px] text-white/92 hover:text-gold transition-colors duration-300 font-medium tracking-tight"
                 >
                   {item.name}
                 </motion.a>
               ))}
-              <motion.button
+              <motion.a
+                href={content.nav.cta.href}
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.5 }}
                 whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(212, 175, 55, 0.5)" }}
                 whileTap={{ scale: 0.95 }}
-                style={{ paddingLeft: '48px', paddingRight: '48px', paddingTop: '12px', paddingBottom: '12px' }}
-                className="bg-gold text-black font-semibold rounded-full hover:bg-gold-light transition-all duration-300"
+                style={{ paddingLeft: '32px', paddingRight: '32px', paddingTop: '12px', paddingBottom: '12px' }}
+                className="ml-4 bg-gold text-black font-semibold rounded-full hover:bg-gold-light transition-all duration-300"
               >
-                Get Started
-              </motion.button>
+                {content.nav.cta.label}
+              </motion.a>
             </div>
 
             {/* Mobile Menu Button */}
@@ -124,17 +119,18 @@ export default function Navigation() {
               {item.name}
             </motion.a>
           ))}
-          <motion.button
+          <motion.a
+            href={content.nav.cta.href}
             initial={{ opacity: 0, x: 50 }}
             animate={isOpen ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.3, delay: 0.5 }}
+            onClick={() => setIsOpen(false)}
             className="px-12 py-5 bg-gold text-black font-semibold rounded-full hover:bg-gold-light transition-all duration-300 text-center"
           >
-            Get Started
-          </motion.button>
+            {content.nav.cta.label}
+          </motion.a>
         </div>
       </motion.div>
     </>
   )
 }
-

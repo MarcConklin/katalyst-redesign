@@ -17,7 +17,7 @@ export default function Hero() {
   const scale = useTransform(scrollYProgress, [0, 1], [1, 1.1])
 
   return (
-    <section ref={ref} className="relative h-screen overflow-hidden bg-black">
+    <section ref={ref} id="home" className="relative h-screen overflow-hidden bg-black">
       {/* Background Image with Parallax */}
       <motion.div 
         style={{ y, scale }}
@@ -34,17 +34,17 @@ export default function Hero() {
       {/* Content */}
       <motion.div
         style={{ opacity }}
-        className="relative z-20 h-full flex flex-col items-center justify-center px-6"
+        className="relative z-20 min-h-screen flex items-center justify-center px-5 pt-36 pb-24 md:px-8 md:pt-40 md:pb-28"
       >
-        <div className="w-full max-w-6xl mx-auto text-center flex flex-col items-center">
+        <div className="w-full max-w-5xl mx-auto text-center flex flex-col items-center">
           {/* Tagline */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="mb-6 flex justify-center"
+            className="mb-5 flex justify-center"
           >
-            <span className="text-gold text-sm font-medium tracking-wider uppercase">
+            <span className="rounded-full border border-gold/30 bg-black/25 px-4 py-2 text-[11px] md:text-xs font-semibold tracking-[0.22em] uppercase text-gold backdrop-blur-sm">
               {content.hero.tagline}
             </span>
           </motion.div>
@@ -54,11 +54,13 @@ export default function Hero() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 leading-tight text-center w-full"
+            className="w-full max-w-4xl text-4xl sm:text-5xl md:text-[3.25rem] lg:text-[4.2rem] font-black uppercase tracking-[-0.03em] text-white mb-7 leading-[1.05]"
           >
-            We speak <span className="text-gold italic">luxury</span>.
-            <br />
-            We also speak <span className="text-gold italic">rock 'n roll</span>.
+            <span className="block">{content.hero.headline.lead}</span>
+            <span className="block -mt-1 text-gold italic [text-shadow:0_0_28px_rgba(212,175,55,0.25)]">
+              {content.hero.headline.accent}
+            </span>
+            <span className="block -mt-1 text-white/92">{content.hero.headline.close}</span>
           </motion.h1>
 
           {/* Description */}
@@ -66,7 +68,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-12 leading-relaxed text-center w-full"
+            className="w-full max-w-3xl text-[19px] md:text-[22px] text-gray-200/95 mb-10 leading-[1.65]"
           >
             {content.hero.description}
           </motion.p>
@@ -76,27 +78,29 @@ export default function Hero() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center w-full"
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
           >
-            <motion.button
+            <motion.a
+              href={content.hero.cta.primaryHref}
               whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(212, 175, 55, 0.5)" }}
               whileTap={{ scale: 0.95 }}
-              style={{ paddingLeft: '48px', paddingRight: '48px', paddingTop: '14px', paddingBottom: '14px', fontSize: '18px' }}
-              className="group bg-gold text-black font-semibold rounded-full flex items-center gap-2 hover:bg-gold-light transition-all duration-300"
+              style={{ paddingLeft: '36px', paddingRight: '36px', paddingTop: '15px', paddingBottom: '15px', fontSize: '18px' }}
+              className="group min-w-[300px] justify-center bg-gold text-black font-semibold rounded-full flex items-center gap-2 hover:bg-gold-light transition-all duration-300"
             >
               {content.hero.cta.primary}
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </motion.button>
+            </motion.a>
 
-            <motion.button
+            <motion.a
+              href={content.hero.cta.secondaryHref}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              style={{ paddingLeft: '48px', paddingRight: '48px', paddingTop: '14px', paddingBottom: '14px', fontSize: '18px' }}
-              className="group bg-white/10 text-white font-semibold rounded-full flex items-center gap-2 backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-all duration-300"
+              style={{ paddingLeft: '30px', paddingRight: '30px', paddingTop: '15px', paddingBottom: '15px', fontSize: '18px' }}
+              className="group min-w-[300px] justify-center bg-white/10 text-white font-semibold rounded-full flex items-center gap-2 backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-all duration-300"
             >
               <Play className="w-5 h-5" />
               {content.hero.cta.secondary}
-            </motion.button>
+            </motion.a>
           </motion.div>
         </div>
       </motion.div>
@@ -139,4 +143,3 @@ export default function Hero() {
     </section>
   )
 }
-
